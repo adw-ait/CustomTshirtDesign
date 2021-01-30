@@ -11,8 +11,6 @@ function App() {
 
   const [canvas, setCanvas] = useState();
 
-  const [objectSelected, setobjectSelected] = useState(false);
-
   useEffect(() => {
     setCanvas(initCanvas());
   }, []);
@@ -46,15 +44,6 @@ function App() {
     canvi.remove(canvi.getActiveObject());
   };
 
-  /** HANDLE SELECTION */
-
-  if (canvas) {
-    canvas.on({
-      "selection:created": () => setobjectSelected(!objectSelected),
-      "selection:cleared": () => setobjectSelected(!objectSelected),
-    });
-  }
-
   return (
     <div className="container">
       <Home.Provider
@@ -64,7 +53,6 @@ function App() {
           addImage,
           changeColor,
           removeImage,
-          objectSelected,
         }}
       >
         <TshirtContainer />
