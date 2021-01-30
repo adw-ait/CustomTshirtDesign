@@ -1,23 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useEffect, useState } from "react";
+import "./style.css";
+import TshirtContainer from "./TshirtContainer";
+import { fabric } from "fabric";
+import Settings from "./Settings";
+
+export const Home = createContext();
 
 function App() {
+  const tshirtStyle = { backgroundColor: "#62959c" };
+  const [tshirtProps, settshirtProps] = useState(tshirtStyle);
+
+  const [canvas, setCanvas] = useState("");
+
+  useEffect(() => {
+    setCanvas(initCanvas());
+  }, []);
+
+  /** INITIALIZE CANVAS */
+  const initCanvas = () =>
+    new fabric.Canvas("tcanvas", {
+      height: 400,
+      width: 200,
+    });
+
+  /** ADD IMAGE TO CANVAS */
+  const addImage = (canvi) => {
+    new fabric.Image.fromURL("./images/circle-cropped.png", (img) => {
+      canvi.add(img);
+      canvi.renderAll();
+    });
+  };
+
+  /** CHANGE TSHIRT COLOR */
+  const changeColor = (e) => {
+    let temp = { ...tshirtProps };
+    temp = { ...temp, backgroundColor: e.color };
+    settshirtProps(temp);
+  };
+
+  /** REMOVE SELECTED IMAGE FROM CANVAS */
+  const removeImage = (canvi) => {
+    canvi.remove(canvi.getActiveObject());
+  };
+
+  /**CANVAS EVENTS */
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Home.Provider
+        value={{
+          tshirtProps,
+          canvas,
+          addImage,
+          changeColor,
+          removeImage,
+        }}
+      >
+        <TshirtContainer />
+        <Settings />
+      </Home.Provider>
     </div>
   );
 }

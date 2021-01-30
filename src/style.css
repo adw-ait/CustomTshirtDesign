@@ -1,0 +1,38 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+.img-container {
+  position: relative;
+  height: 630px;
+  width: 530px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.colorPicker {
+  /* align-self: center; */
+}
+
+.color {
+  display: inline-block;
+  border: 1px solid black;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.color:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
