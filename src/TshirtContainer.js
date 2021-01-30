@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import tshirt from "./images/mens_longsleeve_front.png";
+import tshirt from "./images/crew_front.png";
 import { Home } from "./App";
 
 function TshirtContainer() {

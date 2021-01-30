@@ -24,8 +24,10 @@ function App() {
     });
 
   /** ADD IMAGE TO CANVAS */
-  const addImage = (canvi) => {
-    new fabric.Image.fromURL("./images/circle-cropped.png", (img) => {
+  const addImage = (canvi, url) => {
+    new fabric.Image.fromURL(url, (img) => {
+      img.scaleToHeight(200);
+      img.scaleToWidth(200);
       canvi.add(img);
       canvi.renderAll();
     });
