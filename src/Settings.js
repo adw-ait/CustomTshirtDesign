@@ -1,52 +1,48 @@
-import React, { useContext } from "react";
-import { Home } from "./App";
-import { colors } from "./Colors";
-import { images } from "./images";
+import React, { useState } from "react";
+
+import ColorPicker from "./ColorPicker";
+import ImagePicker from "./ImagePicker";
 
 function Settings() {
-  const { canvas, addImage, changeColor, removeImage } = useContext(Home);
+  const tabs = { colorPicker: true, imagePicker: false };
+  const [display, setdisplay] = useState(tabs);
+  const toggleDisplay = (e) => {
+    let tempDisplay = { ...display };
+    switch (e) {
+      case "color":
+        tempDisplay = { ...tempDisplay, colorPicker: true, imagePicker: false };
+        return setdisplay(tempDisplay);
+      case "image":
+        tempDisplay = { ...tempDisplay, colorPicker: false, imagePicker: true };
+        return setdisplay(tempDisplay);
+      default:
+        return tempDisplay;
+    }
+  };
   return (
-    <div className="colorPicker">
-      <ul>
-        {colors.map((c) => {
-          return (
-            <li
-              key={c.id}
-              className="color"
-              onClick={(e) => changeColor({ color: c.color })}
-              style={{ backgroundColor: c.color }}
-            ></li>
-          );
-        })}
-      </ul>
-      <div className="addImage">
-        <ul className="addImage">
-          {images.map((img) => {
-            return (
-              <li className="imageList" key={img.url}>
-                <img
-                  className="definedImages"
-                  onClick={() => {
-                    addImage(canvas, img.url);
-                  }}
-                  src={img.url}
-                  alt=""
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="deleteImage">
+    <div className="tabSettings">
+      <div className="buttons">
         <button
-          className="deleteBtn"
-          onClick={() => {
-            removeImage(canvas);
+          className="tabButtons"
+          id="color"
+          onClick={(e) => {
+            toggleDisplay(e.target.id);
           }}
         >
-          Delete
+          Color
+        </button>
+        <button
+          className="tabButtons"
+          id="image"
+          onClick={(e) => {
+            toggleDisplay(e.target.id);
+          }}
+        >
+          Add Image
         </button>
       </div>
+      {display.colorPicker && <ColorPicker />}
+      {display.imagePicker && <ImagePicker />}
     </div>
   );
 }

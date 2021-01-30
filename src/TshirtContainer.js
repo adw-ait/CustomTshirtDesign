@@ -7,7 +7,7 @@ function TshirtContainer() {
 
   return (
     <div className="tshirtContainer">
-      <div className="img-container" style={tshirtProps}>
+      <div className="img-container" style={{ backgroundColor: tshirtProps }}>
         <img className="tshirt-img" src={tshirt} alt="" />
 
         <div

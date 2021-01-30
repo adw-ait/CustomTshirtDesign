@@ -41,7 +41,7 @@ ul {
   display: flex;
 
   flex-wrap: wrap;
-  width: 206px;
+  width: 220px;
 }
 
 .definedImages {
@@ -52,6 +52,8 @@ ul {
 .imageList {
   border: 1px solid white;
   background-color: gray;
+  border-radius: 10px;
+  margin: 2px;
 }
 
 .imageList:hover {
@@ -67,6 +69,7 @@ ul {
   background-color: red;
   border-radius: 10px;
   border: none;
+  outline: none;
 }
 
 .deleteBtn:hover {
@@ -74,4 +77,25 @@ ul {
 }
 .deleteImage {
   margin: 10px;
+}
+
+.tabSettings {
+  width: 220px;
+}
+
+.tabButtons {
+  padding: 10px;
+  color: black;
+  font-size: 1.1em;
+  border: none;
+  width: 50%;
+  background-color: rgb(218, 218, 218);
+}
+
+.tabButtons:hover {
+  background-color: rgba(218, 218, 218, 0.733);
+}
+
+.buttons {
+  margin-bottom: 10px;
 }

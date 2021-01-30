@@ -7,8 +7,7 @@ import Settings from "./Settings";
 export const Home = createContext();
 
 function App() {
-  const tshirtStyle = { backgroundColor: "#62959c" };
-  const [tshirtProps, settshirtProps] = useState(tshirtStyle);
+  const [tshirtProps, settshirtProps] = useState("#62959c");
 
   const [canvas, setCanvas] = useState("");
 
@@ -35,8 +34,7 @@ function App() {
 
   /** CHANGE TSHIRT COLOR */
   const changeColor = (e) => {
-    let temp = { ...tshirtProps };
-    temp = { ...temp, backgroundColor: e.color };
+    let temp = e;
     settshirtProps(temp);
   };
 
