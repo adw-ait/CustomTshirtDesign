@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Home } from "./App";
 import { images } from "./images";
 function ImagePicker() {
-  const { canvas, addImage, removeImage } = useContext(Home);
+  const { canvas, addImage, removeImage, objectSelected } = useContext(Home);
   return (
     <div>
       <div className="addImage">
@@ -13,7 +13,7 @@ function ImagePicker() {
                 <img
                   className="definedImages"
                   onClick={() => {
-                    addImage(canvas, img.url);
+                    addImage(img.url);
                   }}
                   src={img.url}
                   alt=""
@@ -23,16 +23,18 @@ function ImagePicker() {
           })}
         </ul>
       </div>
-      <div className="deleteImage">
-        <button
-          className="deleteBtn"
-          onClick={() => {
-            removeImage(canvas);
-          }}
-        >
-          Delete
-        </button>
-      </div>
+      {objectSelected && (
+        <div className="deleteImage">
+          <button
+            className="deleteBtn"
+            onClick={() => {
+              removeImage(canvas);
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 }

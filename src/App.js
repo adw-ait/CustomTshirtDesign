@@ -9,7 +9,9 @@ export const Home = createContext();
 function App() {
   const [tshirtProps, settshirtProps] = useState("#62959c");
 
-  const [canvas, setCanvas] = useState("");
+  const [canvas, setCanvas] = useState();
+
+  const [objectSelected, setobjectSelected] = useState(false);
 
   useEffect(() => {
     setCanvas(initCanvas());
@@ -23,12 +25,13 @@ function App() {
     });
 
   /** ADD IMAGE TO CANVAS */
-  const addImage = (canvi, url) => {
+  const addImage = (url) => {
     new fabric.Image.fromURL(url, (img) => {
       img.scaleToHeight(200);
       img.scaleToWidth(200);
-      canvi.add(img);
-      canvi.renderAll();
+      canvas.add(img);
+
+      canvas.renderAll();
     });
   };
 
@@ -43,7 +46,14 @@ function App() {
     canvi.remove(canvi.getActiveObject());
   };
 
-  /**CANVAS EVENTS */
+  /** HANDLE SELECTION */
+
+  if (canvas) {
+    canvas.on({
+      "selection:created": () => setobjectSelected(!objectSelected),
+      "selection:cleared": () => setobjectSelected(!objectSelected),
+    });
+  }
 
   return (
     <div className="container">
@@ -54,6 +64,7 @@ function App() {
           addImage,
           changeColor,
           removeImage,
+          objectSelected,
         }}
       >
         <TshirtContainer />
