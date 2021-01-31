@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import ColorPicker from "./ColorPicker";
 import ImagePicker from "./ImagePicker";
+import TextToCanvas from "./TextToCanvas";
 
 function Settings() {
   const tabs = { colorPicker: true, imagePicker: false };
@@ -43,6 +44,7 @@ function Settings() {
       </div>
       {display.colorPicker && <ColorPicker />}
       {display.imagePicker && <ImagePicker />}
+      {/* <TextToCanvas /> */}
     </div>
   );
 }
