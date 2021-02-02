@@ -9,10 +9,25 @@ export const Home = createContext();
 function App() {
   const [tshirtProps, settshirtProps] = useState("#62959c");
   const [canvas, setCanvas] = useState();
+  const [ObjectSelected, setObjectSelected] = useState(false);
 
   useEffect(() => {
     setCanvas(initCanvas());
   }, []);
+
+  /**TOGGLE DELETE BUTTON ON OBJECT SELECTION  */
+  useEffect(() => {
+    if (!canvas) {
+      return;
+    }
+
+    canvas.on("selection:created", () => {
+      setObjectSelected(true);
+    });
+    canvas.on("selection:cleared", () => {
+      setObjectSelected(false);
+    });
+  }, [canvas]);
 
   /** CHANGE COLOR VIA INPUT */
   const changeColorText = (e) => {
@@ -48,13 +63,13 @@ function App() {
     canvi.remove(canvi.getActiveObject());
   };
 
-  /**ADD TEXT TO CANVAS */
-  const addTextToTshirt = (text) => {
-    console.log(text);
-    const addText = new fabric.Text(text);
-    canvas.add(addText);
-    canvas.renderAll();
-  };
+  //TODO: ADD TEXT TO CANVAS
+  // const addTextToTshirt = (text) => {
+  //   console.log(text);
+  //   const addText = new fabric.Text(text);
+  //   canvas.add(addText);
+  //   canvas.renderAll();
+  // };
 
   return (
     <div className="container">
@@ -66,7 +81,7 @@ function App() {
           changeColor,
           removeImage,
           changeColorText,
-          addTextToTshirt,
+          ObjectSelected,
         }}
       >
         <TshirtContainer />
