@@ -82,6 +82,7 @@ function App() {
           removeImage,
           changeColorText,
           ObjectSelected,
+          addTextToTshirt,
         }}
       >
         <Settings />
