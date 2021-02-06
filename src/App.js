@@ -63,13 +63,13 @@ function App() {
     canvi.remove(canvi.getActiveObject());
   };
 
-  //TODO: ADD TEXT TO CANVAS
-  // const addTextToTshirt = (text) => {
-  //   console.log(text);
-  //   const addText = new fabric.Text(text);
-  //   canvas.add(addText);
-  //   canvas.renderAll();
-  // };
+  /**ADD TEXT TO CANVAS */
+  const addTextToTshirt = (text) => {
+    console.log(text);
+    const addText = new fabric.Textbox(text);
+    canvas.add(addText);
+    canvas.renderAll();
+  };
 
   return (
     <div className="container">
@@ -84,8 +84,8 @@ function App() {
           ObjectSelected,
         }}
       >
-        <TshirtContainer />
         <Settings />
+        <TshirtContainer />
       </Home.Provider>
     </div>
   );
