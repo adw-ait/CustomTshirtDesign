@@ -2,11 +2,13 @@ html {
   display: flex;
   justify-content: center;
 }
+
 .img-container {
   position: relative;
   height: 630px;
   width: 530px;
 }
+
 .container {
   display: flex;
   flex-direction: row;
@@ -35,7 +37,6 @@ ul {
 
 .addImage {
   display: flex;
-
   flex-wrap: wrap;
   width: 220px;
 }
@@ -72,6 +73,7 @@ ul {
   border: 2px solid black;
   cursor: pointer;
 }
+
 .deleteImage {
   margin: 10px;
 }

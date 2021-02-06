@@ -16,6 +16,7 @@ function TextToCanvas() {
       <button
         onClick={() => {
           addTextToTshirt(text);
+          settext("");
         }}
       >
         Add text

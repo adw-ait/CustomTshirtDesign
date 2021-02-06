@@ -44,7 +44,7 @@ function Settings() {
       </div>
       {display.colorPicker && <ColorPicker />}
       {display.imagePicker && <ImagePicker />}
-      {/* <TextToCanvas /> */}
+      <TextToCanvas />
     </div>
   );
 }

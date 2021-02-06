@@ -51,7 +51,7 @@ function App() {
   /**ADD TEXT TO CANVAS */
   const addTextToTshirt = (text) => {
     console.log(text);
-    const addText = new fabric.Text(text);
+    const addText = new fabric.Textbox(text);
     canvas.add(addText);
     canvas.renderAll();
   };
@@ -69,8 +69,8 @@ function App() {
           addTextToTshirt,
         }}
       >
-        <TshirtContainer />
         <Settings />
+        <TshirtContainer />
       </Home.Provider>
     </div>
   );
