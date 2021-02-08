@@ -1,0 +1,39 @@
+.text-style-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+$buttons: bold, italic, underline, overline;
+
+@each $btn in $buttons {
+  .btn-#{$btn} {
+    padding: 10px;
+    margin: 3px;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background-color: rgb(104, 174, 231);
+    color: white;
+    border-radius: 8px;
+  }
+}
+
+@each $btn in $buttons {
+  .btn-#{$btn}:hover {
+    cursor: pointer;
+    background-color: rgb(62, 151, 224);
+  }
+}
+
+.btn-italic {
+  font-style: italic;
+}
+
+.btn-underline {
+  text-decoration: underline;
+}
+
+.btn-overline {
+  text-decoration: overline;
+}

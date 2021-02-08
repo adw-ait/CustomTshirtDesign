@@ -1,4 +1,4 @@
-# **Custom Tshirt Design **
+# Custom Tshirt Design
 
 ## using React & FabricJs
 

@@ -5,16 +5,34 @@ import ImagePicker from "./ImagePicker";
 import TextToCanvas from "./TextToCanvas";
 
 function Settings() {
-  const tabs = { colorPicker: true, imagePicker: false };
+  const tabs = { colorPicker: true, imagePicker: false, text: false };
   const [display, setdisplay] = useState(tabs);
   const toggleDisplay = (e) => {
     let tempDisplay = { ...display };
     switch (e) {
       case "color":
-        tempDisplay = { ...tempDisplay, colorPicker: true, imagePicker: false };
+        tempDisplay = {
+          ...tempDisplay,
+          colorPicker: true,
+          imagePicker: false,
+          text: false,
+        };
         return setdisplay(tempDisplay);
       case "image":
-        tempDisplay = { ...tempDisplay, colorPicker: false, imagePicker: true };
+        tempDisplay = {
+          ...tempDisplay,
+          colorPicker: false,
+          imagePicker: true,
+          text: false,
+        };
+        return setdisplay(tempDisplay);
+      case "text":
+        tempDisplay = {
+          ...tempDisplay,
+          colorPicker: false,
+          imagePicker: false,
+          text: true,
+        };
         return setdisplay(tempDisplay);
       default:
         return tempDisplay;
@@ -41,10 +59,19 @@ function Settings() {
         >
           Add Image
         </button>
+        <button
+          className="tabButtons"
+          id="text"
+          onClick={(e) => {
+            toggleDisplay(e.target.id);
+          }}
+        >
+          Add Text
+        </button>
       </div>
       {display.colorPicker && <ColorPicker />}
       {display.imagePicker && <ImagePicker />}
-      <TextToCanvas />
+      {display.text && <TextToCanvas />}
     </div>
   );
 }

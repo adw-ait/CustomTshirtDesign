@@ -1,12 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Home } from "./App";
+import DeleteObject from "./DeleteObject";
+import TextSettings from "./TextSettings";
+import "./stylesheet/CanvasTextStyle.scss";
 
 function TextToCanvas() {
-  const { addTextToTshirt } = useContext(Home);
+  const { addTextToTshirt, ObjectSelected } = useContext(Home);
   const [text, settext] = useState("");
+
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div className="addTextInput">
       <input
+        className="input-box"
         type="text"
         value={text}
         onChange={(e) => {
@@ -14,6 +19,7 @@ function TextToCanvas() {
         }}
       />
       <button
+        className="addTextBtn"
         onClick={() => {
           addTextToTshirt(text);
           settext("");
@@ -21,6 +27,8 @@ function TextToCanvas() {
       >
         Add text
       </button>
+      {<TextSettings />}
+      {ObjectSelected && <DeleteObject />}
     </div>
   );
 }

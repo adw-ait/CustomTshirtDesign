@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Home } from "./App";
+import DeleteObject from "./DeleteObject";
 import { images } from "./images";
 function ImagePicker() {
-  const { canvas, addImage, removeImage, ObjectSelected } = useContext(Home);
+  const { addImage, ObjectSelected } = useContext(Home);
   return (
     <div>
       <div className="addImage">
@@ -23,18 +24,7 @@ function ImagePicker() {
           })}
         </ul>
       </div>
-      {ObjectSelected && (
-        <div className="deleteImage">
-          <button
-            className="deleteBtn"
-            onClick={() => {
-              removeImage(canvas);
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      )}
+      {ObjectSelected && <DeleteObject />}
     </div>
   );
 }

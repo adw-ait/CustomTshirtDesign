@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import "./style.css";
+import "./stylesheet/style.css";
 import TshirtContainer from "./TshirtContainer";
 import { fabric } from "fabric";
 import Settings from "./Settings";
@@ -10,7 +10,7 @@ function App() {
   const [tshirtProps, settshirtProps] = useState("#62959c");
   const [canvas, setCanvas] = useState();
   const [ObjectSelected, setObjectSelected] = useState(false);
-
+  const [selectedObjectProps, setselectedObjectProps] = useState({});
   useEffect(() => {
     setCanvas(initCanvas());
   }, []);
@@ -21,8 +21,11 @@ function App() {
       return;
     }
 
-    canvas.on("selection:created", () => {
+    canvas.on("selection:created", (e) => {
       setObjectSelected(true);
+      if (canvas.getActiveObject().get("type") === "i-text") {
+        setselectedObjectProps(e.target);
+      }
     });
     canvas.on("selection:cleared", () => {
       setObjectSelected(false);
@@ -65,10 +68,57 @@ function App() {
 
   /**ADD TEXT TO CANVAS */
   const addTextToTshirt = (text) => {
-    console.log(text);
-    const addText = new fabric.Textbox(text);
+    const addText = new fabric.IText(text, {
+      textBackgroundColor: "",
+      underline: "",
+      overline: "",
+      fill: "#000000",
+      fontFamily: "monospace",
+    });
     canvas.add(addText);
     canvas.renderAll();
+  };
+
+  /**EDIT TEXT STYLES */
+  const textStyles = (whichStyle) => {
+    const activeObject = canvas.getActiveObject();
+    switch (whichStyle.target.id) {
+      //  BOLD
+      case "bold-text":
+        activeObject.set(
+          "fontWeight",
+          selectedObjectProps.fontWeight === "normal" ? "bold" : "normal"
+        );
+        canvas.renderAll();
+        break;
+
+      // ITALIC
+      case "italic-text":
+        activeObject.set(
+          "fontStyle",
+          selectedObjectProps.fontStyle === "normal" ? "italic" : "normal"
+        );
+        canvas.renderAll();
+        break;
+
+      // UNDERLINE
+      case "underline-text":
+        activeObject.set("underline", !selectedObjectProps.underline);
+        canvas.renderAll();
+        break;
+
+      // OVERLINE
+      case "overline-text":
+        activeObject.set("overline", !selectedObjectProps.overline);
+        canvas.renderAll();
+        break;
+
+      // TEXT COLOR
+
+      //DEFAULT
+      default:
+        return null;
+    }
   };
 
   return (
@@ -83,6 +133,7 @@ function App() {
           changeColorText,
           ObjectSelected,
           addTextToTshirt,
+          textStyles,
         }}
       >
         <Settings />
